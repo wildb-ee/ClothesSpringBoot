@@ -1,0 +1,19 @@
+/* Custom styles for header and footer */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+.header {
+    background-color: #343a40; /* dark gray */
+    color: #fff; /* white text */
+    padding: 20px 0;
+}
+.footer {
+    background-color: #343a40; /* dark gray */
+    color: #fff; /* white text */
+    padding: 20px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

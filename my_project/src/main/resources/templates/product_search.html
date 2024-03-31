@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head th:replace="~{fragments::html_head}">
+</head>
+
+<body>
+<header th:replace="~{fragments::html_header}">
+</header>
+
+<div class="container">
+    <h1 class="mt-4 mb-4">Search Products</h1>
+    <!-- Search form -->
+    <form action="#" method="post" th:action="@{/product/search}">
+        <div class="form-row">
+            <!-- Input for searching by name -->
+            <div class="form-group col-md-4">
+                <label for="inputName">Product Name</label>
+                <input type="text" class="form-control" id="inputName" name="name" placeholder="Enter product name">
+            </div>
+            <!-- Input for searching by brand -->
+            <div class="form-group col-md-4">
+                <label for="inputBrand">Brand</label>
+                <input type="text" class="form-control" id="inputBrand" name="brand" placeholder="Enter brand">
+            </div>
+            <!-- Input for searching by color -->
+            <div class="form-group col-md-4">
+                <label for="inputColor">Color</label>
+                <input type="text" class="form-control" id="inputColor" name="color" placeholder="Enter color">
+            </div>
+        </div>
+        <div class="form-row">
+            <!-- Input for searching by category -->
+            <div class="form-group col-md-4">
+                <label for="inputCategory">Category</label>
+                <input type="text" class="form-control" id="inputCategory" name="category" placeholder="Enter category">
+            </div>
+            <!-- Input for searching by size -->
+            <div class="form-group col-md-4">
+                <label for="inputSize">Size</label>
+                <input type="text" class="form-control" id="inputSize" name="size" placeholder="Enter size">
+            </div>
+            <!-- Input for searching by price range -->
+            <div class="form-group col-md-4">
+                <label for="inputPrice">Price Range</label>
+                <input type="text" class="form-control" id="inputPrice" name="price" placeholder="Enter price range">
+            </div>
+        </div>
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <!-- Display search results -->
+    <h2 class="mt-4 mb-4">Search Results</h2>
+    <div class="row">
+        <!-- Iterate through each search result -->
+        <div class="col-lg-4 col-md-6 mb-4" th:each="product : ${searchResults}">
+            <div class="card h-100">
+                <!-- Product image -->
+                <img class="card-img-top" th:src="@{${product.image}}" alt="Product Image">
+                <div class="card-body">
+                    <!-- Product name -->
+                    <h5 class="card-title" th:text="${product.name}"></h5>
+                    <!-- Product price -->
+                    <h6 class="card-subtitle mb-2 text-muted" th:text="'Price: $' + ${product.price}"></h6>
+                    <h6 class="card-subtitle mb-2 text-muted" th:text="'Manufacturer: ' + ${product.brand.name}"></h6>
+
+                    <!-- Product description -->
+                    <p class="card-text" th:text="${product.description}"></p>
+                </div>
+                <div class="card-footer" sec:authorize="hasRole('ROLE_USER')">
+                    <!-- Add to Cart form -->
+                    <form method="post" th:action="@{/user/cart/add}" th:object="${cartItem}">
+                        <input type="hidden" name="productCode" th:value="${product.productCode}" />
+                        <!-- Quantity -->
+                        <input type="number" class="form-control mb-2" name="quantity" value="1" min="1" />
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary btn-block">Add to Cart</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer th:replace="~{fragments::html_footer}">
+</footer>
+</body>
+
+</html>

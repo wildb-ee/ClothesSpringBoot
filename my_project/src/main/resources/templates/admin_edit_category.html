@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{fragments:: html_head}" >
+</head>
+
+<body>
+<header th:replace="~{fragments:: html_header}">
+</header>
+
+<div class="container">
+    <h2>Edit Category</h2>
+    <form method="post" th:action="@{/admin/categories/edit/{code}(code=${category.categoryCode})}">
+        <div class="form-group">
+            <label for="name">Category Name:</label>
+            <input type="text" class="form-control" id="name" th:field="${category.name}" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" th:field="${category.description}" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Category</button>
+    </form>
+</div>
+
+<footer th:replace="~{fragments:: html_footer}">
+</footer>
+</body>
+</html>
+
+
+
+

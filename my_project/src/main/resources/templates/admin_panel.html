@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{fragments:: html_head}" >
+</head>
+
+<body>
+<header th:replace="~{fragments:: html_header}">
+</header>
+
+<div class="container">
+  <h1 class="mt-5">Admin Panel</h1>
+  <ul class="list-group mt-3">
+    <li class="list-group-item">
+      <a th:href="@{/admin/products}" class="btn btn-primary btn-lg btn-block">Manage Products</a>
+    </li>
+    <li class="list-group-item">
+      <a th:href="@{/admin/users}" class="btn btn-primary btn-lg btn-block">Manage Users</a>
+    </li>
+    <li class="list-group-item">
+      <a th:href="@{/admin/categories}" class="btn btn-primary btn-lg btn-block">Manage Categories</a>
+    </li>
+    <li class="list-group-item">
+      <a th:href="@{/admin/brands}" class="btn btn-primary btn-lg btn-block">Manage Brands</a>
+    </li>
+
+  </ul>
+</div>
+
+<footer th:replace="~{fragments:: html_footer}">
+</footer>
+</body>
+</html>
+
+

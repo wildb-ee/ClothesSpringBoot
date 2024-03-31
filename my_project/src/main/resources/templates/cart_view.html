@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{fragments:: html_head}" >
+</head>
+
+<body>
+<header th:replace="~{fragments:: html_header}">
+</header>
+
+<div class="container">
+    <h1 class="mt-4 mb-4">Your Cart</h1>
+
+    <!-- Check if the cart is empty -->
+    <div th:if="${cartItems.isEmpty()}" class="alert alert-info" role="alert">
+        Your cart is empty.
+    </div>
+
+    <!-- Display cart items if not empty -->
+    <div th:if="${not cartItems.isEmpty()}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Product Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Iterate through each cart item -->
+            <tr th:each="item : ${cartItems}">
+                <td th:text="${item.product.name}"></td>
+                <td th:text="${item.product.price}"></td>
+                <td th:text="${item.quantity}"></td>
+                <td>
+                    <form action="/user/cart/remove" method="post">
+                        <input type="hidden" name="cartItemId" th:value="${item.id}">
+                        <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> Remove</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a th:href="@{/user/order/create}" class="btn btn-success mt-5 mb-5 ">Pay and Create Order</a>
+
+    <!-- Add a button to clear the cart -->
+    <form action="/user/cart/clear" method="post">
+        <button type="submit" class="btn btn-primary">Clear Cart</button>
+    </form>
+
+    <!-- Add any additional HTML elements or buttons as needed -->
+
+</div>
+
+<footer th:replace="~{fragments:: html_footer}">
+</footer>
+</body>
+</html>
+
+
+

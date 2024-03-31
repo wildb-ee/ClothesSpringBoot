@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{fragments:: html_head}" >
+</head>
+
+<body>
+<header th:replace="~{fragments:: html_header}">
+</header>
+
+<div class="container mt-5">
+    <h1>User Profile</h1>
+    <hr>
+
+    <!-- Display user profile information -->
+    <div>
+        <p><strong>Location:</strong> <span th:text="${user.username}"></span></p>
+        <p><strong>First Name:</strong> <span th:text="${user.firstName}"></span></p>
+        <p><strong>Last Name:</strong> <span th:text="${user.lastName}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+        <p><strong>Phone:</strong> <span th:text="${user.phone}"></span></p>
+        <p><strong>Location:</strong> <span th:text="${user.location}"></span></p>
+        <p><strong>Location:</strong> <span th:text="${user.role}"></span></p>
+
+
+    </div>
+
+    <!-- Button to edit profile -->
+    <a th:href="@{/user/profile/edit}" class="btn btn-primary">
+        <i class="fas fa-edit"></i> Edit Profile
+    </a>
+</div>
+
+<footer th:replace="~{fragments:: html_footer}">
+</footer>
+</body>
+</html>

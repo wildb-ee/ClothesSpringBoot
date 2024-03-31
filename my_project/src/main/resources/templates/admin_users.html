@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{fragments:: html_head}" >
+</head>
+
+<body>
+<header th:replace="~{fragments:: html_header}">
+</header>
+
+
+<div class="container">
+    <h1>Admin Users</h1>
+    <hr>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td>
+                <span th:if="${user.blocked}">Blocked</span>
+                <span th:unless="${user.blocked}">Active</span>
+            </td>
+            <td>
+                <a th:if='${user.blocked and !user.role.contains("ADMIN")}' th:href="@{'/admin/users/unblock/' + ${user.userCode}}" class="btn btn-warning btn-sm">Unblock</a>
+                <a th:if='${!user.blocked and !user.role.contains("ADMIN") }' th:href="@{'/admin/users/block/' + ${user.userCode}}" class="btn btn-danger btn-sm">Block</a>
+                <a th:if='${!user.role.contains("ADMIN")}' th:href="@{'/admin/users/delete/' + ${user.userCode}}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer th:replace="~{fragments:: html_footer}">
+</footer>
+</body>
+</html>

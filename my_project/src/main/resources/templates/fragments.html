@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:fragment="html_head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Site</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/style.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header text-center" th:fragment="html_header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://scalebranding.com/wp-content/uploads/2022/02/Online-Clothes-Shop-Logo.jpg" alt="Logo" style="max-height: 60px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" sec:authorize="not isAuthenticated()">
+                        <a class="nav-link" th:href="@{/home}"><i class="fas fa-home"></i> Home</a>
+                    </li>
+
+                    <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a class="nav-link" th:href="@{/admin/home}"><i class="fas fa-home"></i>Admin's Home</a>
+                    </li>
+
+                    <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
+                        <a class="nav-link" th:href="@{/user/home}"><i class="fas fa-home"></i>User's Home</a>
+                    </li>
+
+                    <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
+                        <a class="nav-link" th:href="@{/user/cart/view}"><i class="fas fa-shopping-cart"></i> Cart</a>
+                    </li>
+
+                    <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
+                        <a class="nav-link" th:href="@{/user/order/all}"><i class="fas fa-shopping-cart"></i> Orders</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/product/search}"><i class="fas fa-search"></i> Search</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/product/all}"><i class="fas fa-search"></i> Catalog</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/about}"><i class="fas fa-info-circle"></i> About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/contacts}"><i class="fas fa-address-book"></i> Contacts</a>
+                    </li>
+
+                    <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a class="nav-link" th:href="@{/admin/panel}"><i class="fas fa-user-circle"></i> Admin Panel</a>
+                    </li>
+
+                    <li class="nav-item"  sec:authorize="hasRole('ROLE_ADMIN') or hasRole('USER')">
+                        <a class="nav-link" th:href="@{/user/profile/get}"><i class="fas fa-user"></i> Profile</a>
+                    </li>
+
+                    <li class="nav-item"  sec:authorize="not isAuthenticated()">
+                        <a class="nav-link" th:href="@{/login}"><i class="fas fa-user"></i> Login</a>
+                    </li>
+
+                    <li class="nav-item"  sec:authorize="isAuthenticated()">
+                        <a class="nav-link" th:href="@{/logout}"><i class="fas fa-user"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+
+
+<footer class=" mt-auto py-3 text-center" th:fragment="html_footer">
+    <div class="container">
+        <p class="mb-0">&copy; 2024 My Website. All Rights Reserved.</p>
+        <div class="social-links mt-3">
+            <a href="#" class="text-decoration-none text-dark mr-3"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-decoration-none text-dark mr-3"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-decoration-none text-dark mr-3"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-decoration-none text-dark"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </div>
+</footer>
+
+
+
+</body>
+</html>

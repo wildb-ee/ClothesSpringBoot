@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{fragments:: html_head}" >
+</head>
+
+<body>
+<header th:replace="~{fragments:: html_header}">
+</header>
+
+<div class="container">
+    <h1>Categories</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Category Code</th>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="category : ${categories}">
+            <td th:text="${category.categoryCode}">Category Code</td>
+            <td th:text="${category.name}">Category Name</td>
+            <td th:text="${category.description}">Category Description</td>
+            <td>
+                <a class="btn btn-primary" th:href="@{/admin/categories/edit/{code}(code=${category.categoryCode})}">Edit</a>
+                <a class="btn btn-danger" th:href="@{/admin/categories/delete/{code}(code=${category.categoryCode})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="text-right mb-3">
+        <a th:href="@{/admin/categories/add}" class="btn btn-primary">Add New Category</a>
+    </div>
+</div>
+
+
+
+
+<footer th:replace="~{fragments:: html_footer}">
+</footer>
+</body>
+</html>
+
+
+
+

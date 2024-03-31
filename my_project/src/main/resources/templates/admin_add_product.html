@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{fragments:: html_head}" >
+</head>
+
+<body>
+<header th:replace="~{fragments:: html_header}">
+</header>
+
+<div class="container">
+    <h1 class="mt-5">Add Product</h1>
+    <form th:action="@{/admin/products/add}" th:object="${product}" method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}">
+        </div>
+
+        <div class="form-group">
+            <label for="productCategory">Category:</label>
+            <select class="form-control" id="productCategory" th:field="*{category}">
+                <option value="">-- Select Category --</option>
+                <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" id="price" th:field="*{price}">
+        </div>
+
+        <div class="form-group">
+            <label for="productBrand">Brand:</label>
+            <select class="form-control" id="productBrand" th:field="*{brand}">
+                <option value="">-- Select Brand --</option>
+                <option th:each="brand : ${brands}" th:value="${brand.name}" th:text="${brand.name}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="size">Size</label>
+            <input type="text" class="form-control" id="size" th:field="*{size}">
+        </div>
+        <div class="form-group">
+            <label for="color">Color</label>
+            <input type="text" class="form-control" id="color" th:field="*{color}">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" rows="3" th:field="*{description}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="stockQuantity">Stock Quantity</label>
+            <input type="text" class="form-control" id="stockQuantity" th:field="*{stockQuantity}">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<footer th:replace="~{fragments:: html_footer}">
+</footer>
+</body>
+</html>
+
+
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{fragments:: html_head}" >
+</head>
+
+<body>
+<header th:replace="~{fragments:: html_header}">
+</header>
+
+<div class="container">
+    <h1>User Orders</h1>
+    <hr>
+    <div th:each="order : ${userOrders}">
+        <div class="card mb-3">
+            <div class="card-header">
+                Order Number: <span th:text="${order.orderNumber}"></span>
+            </div>
+            <div class="card-body">
+                <p>Status: <span th:text="${order.orderStatus.name}"></span></p>
+                <hr>
+                <h5 class="card-title">Order Items</h5>
+                <ul class="list-group">
+                    <!-- Loop through order details and display each item -->
+                    <li class="list-group-item" th:each="orderDetail : ${order.orderDetails}">
+                        <p>Product Name: <span th:text="${orderDetail.product.name}"></span></p>
+                        <p>Quantity: <span th:text="${orderDetail.quantity}"></span></p>
+                        <p>Total Price: <span th:text="${orderDetail.totalPrice}"></span></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{fragments:: html_footer}">
+</footer>
+</body>
+</html>
